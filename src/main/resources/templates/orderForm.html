@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplikacja Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+    <div class="page-wrapper">
+    <form method="POST" th:action="@{/orders}" th:object="${order}">
+        <div class="horizontal header">
+            <img th:src="@{/images/TacoCloudLogo.png}" class="logo"/>
+            <div>
+                <h1>Zamów przygotowane Taco</h1>
+                <a th:href="@{/design}">Przygotuj kolejne taco</a>
+            </div>
+        </div>
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Usuń wymienione problemy i spróbuj ponownie
+            </span>
+        </div>
+
+        <div class="form-container">
+            <h3>Adres dostarczenia taco:</h3>
+            <div>
+                <label for="name">Imię i nazwisko: </label>
+                <input type="text" th:field="*{name}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Błąd danych imienia i nazwiska.</span>
+            </div>
+
+            <div>
+                <label for="street">Ulica: </label>
+                <input type="text" th:field="*{street}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('street')}"
+                      th:errors="*{street}">Błąd danych ulicy.</span>
+            </div>
+
+            <div>
+                <label for="city">Miejscowość: </label>
+                <input type="text" th:field="*{city}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('city')}"
+                      th:errors="*{city}">Błąd danych miejscowości.</span>
+            </div>
+
+            <div>
+                <label for="state">Województwo: </label>
+                <input type="text" th:field="*{state}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('state')}"
+                      th:errors="*{state}">Błąd danych województwa.</span>
+            </div>
+
+            <div>
+                <label for="zip">Kod pocztowy: </label>
+                <input type="text" th:field="*{zip}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('zip')}"
+                      th:errors="*{zip}">Błąd danych kodu pocztowego.</span>
+            </div>
+
+            <h3>Sposób płatności</h3>
+
+            <div>
+                <label for="ccNumber">Numer karty kredytowej: </label>
+                <input type="text" th:field="*{ccNumber}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('ccNumber')}"
+                      th:errors="*{ccNumber}">Błąd danych numeru karty kredytowej.</span>
+            </div>
+
+            <div>
+                <label for="ccExpiration">Data ważności: </label>
+                <input type="text" th:field="*{ccExpiration}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('ccExpiration')}"
+                      th:errors="*{ccExpiration}">Błąd danych daty ważności karty kredytowej.</span>
+            </div>
+
+            <div>
+                <label for="ccCVV">Kod CVV: </label>
+                <input type="text" th:field="*{ccCVV}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('ccCVV')}"
+                      th:errors="*{ccCVV}">Błąd danych kodu CVV karty kredytowej.</span>
+            </div>
+
+            <input type="submit" value="Złóż zamówienie"/>
+
+        </div>
+
+    </form>
+    </div>
+</body>
+</html>
