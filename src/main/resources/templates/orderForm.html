@@ -25,43 +25,43 @@
         <div class="form-container">
             <h3>Adres dostarczenia taco:</h3>
             <div>
-                <label for="name">Imię i nazwisko: </label>
-                <input type="text" th:field="*{name}"/>
+                <label for="deliveryName">Imię i nazwisko: </label>
+                <input type="text" th:field="*{deliveryName}"/>
                 <span class="validationError"
-                      th:if="${#fields.hasErrors('name')}"
-                      th:errors="*{name}">Błąd danych imienia i nazwiska.</span>
+                      th:if="${#fields.hasErrors('deliveryName')}"
+                      th:errors="*{deliveryName}">Błąd danych imienia i nazwiska.</span>
             </div>
 
             <div>
-                <label for="street">Ulica: </label>
-                <input type="text" th:field="*{street}"/>
+                <label for="deliveryStreet">Ulica: </label>
+                <input type="text" th:field="*{deliveryStreet}"/>
                 <span class="validationError"
-                      th:if="${#fields.hasErrors('street')}"
-                      th:errors="*{street}">Błąd danych ulicy.</span>
+                      th:if="${#fields.hasErrors('deliveryStreet')}"
+                      th:errors="*{deliveryStreet}">Błąd danych ulicy.</span>
             </div>
 
             <div>
-                <label for="city">Miejscowość: </label>
-                <input type="text" th:field="*{city}"/>
+                <label for="deliveryCity">Miejscowość: </label>
+                <input type="text" th:field="*{deliveryCity}"/>
                 <span class="validationError"
-                      th:if="${#fields.hasErrors('city')}"
-                      th:errors="*{city}">Błąd danych miejscowości.</span>
+                      th:if="${#fields.hasErrors('deliveryCity')}"
+                      th:errors="*{deliveryCity}">Błąd danych miejscowości.</span>
             </div>
 
             <div>
-                <label for="state">Województwo: </label>
-                <input type="text" th:field="*{state}"/>
+                <label for="deliveryState">Województwo: </label>
+                <input type="text" th:field="*{deliveryState}"/>
                 <span class="validationError"
-                      th:if="${#fields.hasErrors('state')}"
-                      th:errors="*{state}">Błąd danych województwa.</span>
+                      th:if="${#fields.hasErrors('deliveryState')}"
+                      th:errors="*{deliveryState}">Błąd danych województwa.</span>
             </div>
 
             <div>
-                <label for="zip">Kod pocztowy: </label>
-                <input type="text" th:field="*{zip}"/>
+                <label for="deliveryZip">Kod pocztowy: </label>
+                <input type="text" th:field="*{deliveryZip}"/>
                 <span class="validationError"
-                      th:if="${#fields.hasErrors('zip')}"
-                      th:errors="*{zip}">Błąd danych kodu pocztowego.</span>
+                      th:if="${#fields.hasErrors('deliveryZip')}"
+                      th:errors="*{deliveryZip}">Błąd danych kodu pocztowego.</span>
             </div>
 
             <h3>Sposób płatności</h3>
