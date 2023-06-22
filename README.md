@@ -1,5 +1,5 @@
 # Taco Cloud
-Taco Cloud is an full-stack Java application built with Spring Boot, developed in the course of reading `Spring in Action, 5th Edition`
+Taco Cloud is an full-stack Java application built with Spring Boot, developed over the course of reading `Spring in Action, 5th Edition`
 book by *Craig Walls*, originally published by *Manning Publications Co.*, polish edition by *Helion SA*.
 
 [Spring w Akcji, wydanie V, wydawnictwa Helion  
