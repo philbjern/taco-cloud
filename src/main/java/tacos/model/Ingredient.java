@@ -1,4 +1,4 @@
-package sia.tacos.model;
+package tacos.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

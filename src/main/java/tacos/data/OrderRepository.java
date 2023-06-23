@@ -1,7 +1,6 @@
-package sia.tacos.data;
+package tacos.data;
 
 import org.springframework.data.repository.CrudRepository;
-import sia.tacos.model.Order;
-
+import tacos.model.Order;
 public interface OrderRepository extends CrudRepository<Order, Long> {
 }
