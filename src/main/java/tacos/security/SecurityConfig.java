@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import tacos.data.UserRepository;
-import tacos.model.TacoCloudUser;
+import tacos.model.User;
 
 @Configuration
 public class SecurityConfig {
@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepo) {
         return username -> {
-            TacoCloudUser user = userRepo.findByUsername(username);
+            User user = userRepo.findByUsername(username);
             if (user != null) return user;
 
             throw new UsernameNotFoundException("User '" + username + "' not found");

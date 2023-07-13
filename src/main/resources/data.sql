@@ -33,3 +33,7 @@ insert into Ingredient (id, name, type)
 
 insert into Ingredient (id, name, type)
     values ('SRCR', 'śmietana', 'SAUCE');
+
+insert into Taco_User (id, username, password, fullname, street, city, state, zip, phoneNumber)
+    values ('1', 'username' , '$2a$10$ROojOvHLrHFNWlmuaM90VuwUhlunQpLyn.7ZokCx1y9Q3wNFBQHky',
+        'Bob Krasinsky', 'Sunny Blvd. 25', 'Los Angeles', 'California', 'CA', '123456789');

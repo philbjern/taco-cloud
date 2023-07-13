@@ -43,7 +43,8 @@ public class DesignTacoController {
         return "design";
     }
 
-    private Model addIngredientsList(Model model) {
+    @ModelAttribute
+    private void addIngredientsList(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientsRepository.findAll().forEach(ingredients::add);
 
@@ -52,8 +53,6 @@ public class DesignTacoController {
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
-
-        return model;
     }
 
     private List<Object> filterByType(List<Ingredient> ingredients, Type type) {
@@ -76,7 +75,7 @@ public class DesignTacoController {
     public String processDesign(@Valid Taco design, Errors errors, Model model, @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             log.error("Design form has validation errors: {}", errors.getAllErrors());
-            addIngredientsList(model);
+//            addIngredientsList(model);
             return "design";
         }
 
