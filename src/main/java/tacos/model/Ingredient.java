@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 public class Ingredient {
 
     @Id
-    private final String id;
-    private final String name;
+    private String id;
+    private String name;
 
     @Enumerated(EnumType.STRING)
-    private final Type type;
+    private Type type;
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
