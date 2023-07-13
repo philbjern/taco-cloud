@@ -26,7 +26,7 @@ import tacos.model.Taco;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-    private final IngredientsRepository ingredientsRepository;
+    private IngredientsRepository ingredientsRepository;
     private TacoRepository designRepo;
 
     @Autowired
@@ -38,13 +38,11 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model) {
-        addIngredientsList(model);
-//        model.addAttribute("design", new Taco());
         return "design";
     }
 
     @ModelAttribute
-    private void addIngredientsList(Model model) {
+    private void addIngredientsToModel(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientsRepository.findAll().forEach(ingredients::add);
 
@@ -75,7 +73,7 @@ public class DesignTacoController {
     public String processDesign(@Valid Taco design, Errors errors, Model model, @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             log.error("Design form has validation errors: {}", errors.getAllErrors());
-//            addIngredientsList(model);
+//            addIngredientsToModel(model);
             return "design";
         }
 
