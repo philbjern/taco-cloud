@@ -1,19 +1,24 @@
 package tacos.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Taco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date createdAt;
@@ -22,9 +27,13 @@ public class Taco {
     @Size(min=5, message="Nazwa musi składać się z przynajmniej pięciu znaków.")
     private String name;
 
-    @ManyToMany(targetEntity = Ingredient.class)
+    @ManyToMany
     @Size(min=1, message="Musisz wybrać przynajmniej jeden składnik.")
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
 
     @PrePersist
     void createdAt() {

@@ -33,18 +33,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        .authorizeHttpRequests()
-            .requestMatchers("/design", "/orders").hasRole("USER")
-            .requestMatchers("/h2-console/**").permitAll()
-            .requestMatchers("/", "/**").permitAll()
-        .and()
-            .headers().frameOptions().disable()
-        .and()
-            .formLogin()
-            .loginPage("/login")
-        .and()
-            .logout()
-            .logoutSuccessUrl("/");
+        .authorizeHttpRequests(authorizeHttpRequest -> {
+            authorizeHttpRequest.antMatchers("/design", "/orders").hasRole("USER")
+                    .antMatchers("/h2-console/**").permitAll()
+                    .antMatchers("/", "/**").permitAll();
+        });
+        http.headers().frameOptions().disable()
+                .and()
+                    .formLogin()
+                    .loginPage("/login")
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/");
         http.csrf().disable();
         return http.build();
     }
@@ -53,7 +53,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> {
             web.ignoring()
-                    .requestMatchers("/h2-console/**");
+                    .antMatchers("/h2-console/**");
         };
     }
 
