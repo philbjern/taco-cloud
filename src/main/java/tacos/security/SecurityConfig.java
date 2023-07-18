@@ -32,11 +32,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-        .authorizeHttpRequests(authorizeHttpRequest -> {
+        http.authorizeHttpRequests(authorizeHttpRequest -> {
             authorizeHttpRequest.antMatchers("/design", "/orders").hasRole("USER")
-                    .antMatchers("/h2-console/**").permitAll()
-                    .antMatchers("/", "/**").permitAll();
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/", "/**").permitAll();
         });
         http.headers().frameOptions().disable()
                 .and()
