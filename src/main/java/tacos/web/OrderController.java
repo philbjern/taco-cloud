@@ -1,8 +1,10 @@
-package sia.tacos.web;
+package tacos.web;
 
-import jakarta.validation.Valid;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -11,13 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import sia.tacos.data.OrderRepository;
-import sia.tacos.model.Order;
+import tacos.data.OrderRepository;
+import tacos.model.TacoOrder;
+import tacos.model.User;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
-@SessionAttributes("order")
+@SessionAttributes("tacoOrder")
 public class OrderController {
 
     private OrderRepository orderRepo;
@@ -34,11 +39,14 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors,
-                               SessionStatus sessionStatus) {
+    public String processOrder(@Valid TacoOrder order, Errors errors,
+                               SessionStatus sessionStatus,
+                               @AuthenticationPrincipal User user) {
         if (errors.hasErrors()) {
             return "orderForm";
         }
+
+        order.setUser(user);
 
         orderRepo.save(order);
         sessionStatus.setComplete();

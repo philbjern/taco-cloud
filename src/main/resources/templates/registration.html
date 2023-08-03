@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+
+    <head>
+        <title>Aplikacja Taco Cloud</title>
+        <link rel="stylesheet" th:href="@{/styles.css}" />
+    </head>
+
+    <body>
+        <div class="page-wrapper">
+            <div class="horizontal header">
+                <img th:src="@{/images/TacoCloudLogo.png}" class="logo"/>
+                <h1>Taco Cloud</h1>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="center">
+                <form method="POST" th:action="@{/register}" id="registerForm">
+                    <div class="form-container">
+                        <h1>Register</h1>
+                        <div>
+                            <label for="username">Username: </label>
+                            <input type="text" name="username"/><br/>
+                        </div>
+
+                        <div>
+                            <label for="password">Password: </label>
+                            <input type="password" name="password"/><br/>
+                        </div>
+
+                        <div>
+                            <label for="confirm">Confirm password: </label>
+                            <input type="password" name="confirm"/><br/>
+                        </div>
+
+                        <div>
+                            <label for="fullname">Full name: </label>
+                            <input type="text" name="fullname"/><br/>
+                        </div>
+
+                        <div>
+                            <label for="street">Street: </label>
+                            <input type="text" name="street"/><br/>
+                        </div>
+                        
+                        <div>
+                            <label for="city">City: </label>
+                            <input type="text" name="city"/><br/>
+                        </div>
+                        
+                        <div>
+                            <label for="state">State: </label>
+                            <input type="text" name="state"/><br/>
+                        </div>
+                        
+                        <div>
+                            <label for="zip">Zip: </label>
+                            <input type="text" name="zip"/><br/>
+                        </div>
+                        
+                        <div>
+                            <label for="phone">Phone: </label>
+                            <input type="text" name="phone"/><br/>
+                        </div>
+                        
+                        <div class="center">
+                            <input type="submit" value="Register">
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

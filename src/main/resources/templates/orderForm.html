@@ -7,15 +7,26 @@
 </head>
 <body>
     <div class="page-wrapper">
-    <form method="POST" th:action="@{/orders}" th:object="${order}">
         <div class="horizontal header">
-            <img th:src="@{/images/TacoCloudLogo.png}" class="logo"/>
             <div>
-                <h1>Zamów przygotowane Taco</h1>
+                <a th:href="@{/}">
+                    <img th:src="@{/images/TacoCloudLogo.png}" class="logo"/>
+                </a>
+            </div>
+            <div class="flex-1">
+                <h1>Design your taco!</h1>
+            </div>
+            <div class="align-right">
                 <a th:href="@{/design}">Przygotuj kolejne taco</a>
+                <form method="POST" th:action="@{/logout}" id="logoutForm">
+                    <input type="submit" value="Logout" class="btn-logout">
+                </form>
             </div>
         </div>
 
+        <div class="line"></div>
+
+        <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
         <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Usuń wymienione problemy i spróbuj ponownie
