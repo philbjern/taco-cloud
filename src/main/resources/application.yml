@@ -11,6 +11,11 @@
 #    data:
 #      - ingredients.sql
 
+spring:
+  profiles:
+    active:
+      - dev
+
 server:
   port: 8443
   ssl:
@@ -32,3 +37,16 @@ greeting:
 taco:
   orders:
     pageSize: 10
+
+---
+spring:
+  profiles: prod
+
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: tacouser
+    password: tacopassword
+
+logging:
+  level:
+    tacos: WARN
