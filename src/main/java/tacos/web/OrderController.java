@@ -4,6 +4,9 @@ package tacos.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
+@ConfigurationProperties(prefix = "taco.orders")
 public class OrderController {
 
     private OrderRepository orderRepo;
@@ -30,6 +34,12 @@ public class OrderController {
     @Autowired
     public OrderController(OrderRepository orderRepo) {
         this.orderRepo = orderRepo;
+    }
+
+    private int pageSize = 20;
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     @GetMapping("/current")
@@ -53,6 +63,13 @@ public class OrderController {
 
         log.info("Zamówienie zostało złożone: {}", order);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+        Pageable pageable = PageRequest.of(0, 20);
+        model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        return "orderList";
     }
 
 }

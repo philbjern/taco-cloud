@@ -1,0 +1,34 @@
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost/tacocloud
+#    username: tacouser
+#    password: tacopassword
+#    schema:
+#      - order-schema.sql
+#      - ingredient-schema.sql
+#      - taco-schema.sql
+#      - user-schema.sql
+#    data:
+#      - ingredients.sql
+
+server:
+  port: 8443
+  ssl:
+    key-store: file:///Users/archloner/dev/spring/taco-cloud/mykeys.jks
+    key-store-password: letmein
+    key-password: letmein
+
+logging:
+  file:
+    path: /Users/archloner/dev/spring/taco-cloud/logs/
+    file: TacoCloud.log
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
+
+greeting:
+  welcome: You are using ${spring.application.name}.
+
+taco:
+  orders:
+    pageSize: 10
