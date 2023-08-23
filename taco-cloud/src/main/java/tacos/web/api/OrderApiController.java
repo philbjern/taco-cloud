@@ -4,6 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tacos.data.OrderRepository;
+import tacos.messaging.OrderMessagingService;
 import tacos.model.TacoOrder;
 
 @RestController
@@ -13,8 +14,18 @@ public class OrderApiController {
 
     private OrderRepository orderRepo;
 
-    public OrderApiController(OrderRepository orderRepo) {
+    private OrderMessagingService messagingService;
+
+    public OrderApiController(OrderRepository orderRepo, OrderMessagingService messagingService) {
         this.orderRepo = orderRepo;
+        this.messagingService = messagingService;
+    }
+
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public TacoOrder postOrder(@RequestBody TacoOrder order) {
+        messagingService.sendOrder(order);
+        return orderRepo.save(order);
     }
 
     @PutMapping(path = "/{orderId}", consumes = "application/json")

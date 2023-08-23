@@ -8,3 +8,9 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9000/oauth2/jwks
+
+  artemis:
+    host: localhost
+    port: 61617
+    user: username
+    password: password
