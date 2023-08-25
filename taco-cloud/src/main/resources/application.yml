@@ -14,3 +14,7 @@ spring:
     port: 61617
     user: username
     password: password
+
+  jms:
+    template:
+      default-destination: tacocloud.order.queue

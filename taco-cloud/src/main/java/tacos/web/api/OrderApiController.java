@@ -7,6 +7,8 @@ import tacos.data.OrderRepository;
 import tacos.messaging.OrderMessagingService;
 import tacos.model.TacoOrder;
 
+import javax.jms.Destination;
+
 @RestController
 @RequestMapping(path = "/api/order", produces = "application/json")
 @CrossOrigin(origins = "http://tacocloud:8080")
@@ -15,6 +17,8 @@ public class OrderApiController {
     private OrderRepository orderRepo;
 
     private OrderMessagingService messagingService;
+
+    private Destination orderQueue;
 
     public OrderApiController(OrderRepository orderRepo, OrderMessagingService messagingService) {
         this.orderRepo = orderRepo;
