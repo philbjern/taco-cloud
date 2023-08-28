@@ -20,7 +20,8 @@ public class OrderApiController {
 
     private Destination orderQueue;
 
-    public OrderApiController(OrderRepository orderRepo, OrderMessagingService messagingService) {
+    public OrderApiController(OrderRepository orderRepo,
+                              OrderMessagingService messagingService) {
         this.orderRepo = orderRepo;
         this.messagingService = messagingService;
     }

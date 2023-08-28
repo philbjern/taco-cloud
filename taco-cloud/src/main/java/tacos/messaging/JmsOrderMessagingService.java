@@ -1,16 +1,13 @@
 package tacos.messaging;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 import tacos.model.TacoOrder;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
-import javax.jms.Session;
 
 @Service
 public class JmsOrderMessagingService implements OrderMessagingService {
@@ -31,13 +28,12 @@ public class JmsOrderMessagingService implements OrderMessagingService {
 //        jms.send("tacocloud.order.queue", session -> session.createObjectMessage(order));
 //    }
 
-
     @Override
     public void sendOrder(TacoOrder order) {
         jms.convertAndSend("tacocloud.order.queue", order, this::addOrderSource);
     }
 
-    private Message addOrderSource(Message message) throws JmsException {
+    private Message addOrderSource(Message message) throws JMSException {
         message.setStringProperty("X_ORDER_SOURCE", "WEB)");
         return message;
     }
