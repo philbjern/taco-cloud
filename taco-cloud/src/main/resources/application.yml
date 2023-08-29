@@ -9,21 +9,21 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9000/oauth2/jwks
-  rabbitmq:
-    template:
-      receive-timeout: 30000
 
 ---
 spring:
   profiles: dev
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    template:
+      default-topic: tacocloud.orders.topic
 
 ---
 spring:
   profiles: prod
-  rabbitmq:
-    host: rabbit.tacocloud.com
-    port: 5673
-    username: tacoweb
-    password: l3tm31n
-    exchange: tacocloud.order
-    routing-key: kitchens.central
+  kafka:
+    bootstrap-servers:
+      - kafka.tacocloud.com:9092
+      - kafka.tacocloud.com:9093
+      - kafka.tacocloud.com:9094
