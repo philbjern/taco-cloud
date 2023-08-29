@@ -1,20 +1,29 @@
 spring:
+  profiles:
+    active: dev
   data:
     rest:
       base-path: /data-api
-
   security:
     oauth2:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9000/oauth2/jwks
-
-  artemis:
-    host: localhost
-    port: 61617
-    user: username
-    password: password
-
-  jms:
+  rabbitmq:
     template:
-      default-destination: tacocloud.order.queue
+      receive-timeout: 30000
+
+---
+spring:
+  profiles: dev
+
+---
+spring:
+  profiles: prod
+  rabbitmq:
+    host: rabbit.tacocloud.com
+    port: 5673
+    username: tacoweb
+    password: l3tm31n
+    exchange: tacocloud.order
+    routing-key: kitchens.central

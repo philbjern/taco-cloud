@@ -1,13 +1,11 @@
-package tacos.kitchen.messaging.jms.listener;
+package tacos.kitchen.messaging.rabbit.listener;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import tacos.kitchen.KitchenUI;
 import tacos.model.TacoOrder;
 
-@Profile("jms-listener")
 @Component
 public class OrderListener {
 
@@ -18,7 +16,8 @@ public class OrderListener {
         this.ui = ui;
     }
 
-    @JmsListener(destination = "tacocloud.order.queue")
+
+    @RabbitListener(queues = "tacocloud.order.queue")
     public void receiveOrder(TacoOrder order) {
         ui.displayOrder(order);
     }
