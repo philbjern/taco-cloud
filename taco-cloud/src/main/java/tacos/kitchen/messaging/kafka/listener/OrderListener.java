@@ -25,24 +25,24 @@ public class OrderListener {
         this.log = log;
     }
 
-    @KafkaListener(topics = "tacocloud.orders.topic")
-    public void handle(TacoOrder order) {
-        ui.displayOrder(order);
-    }
-
-    @KafkaListener(topics = "tacocloud.orders.topic")
-    public void handle(TacoOrder order, ConsumerRecord<String, TacoOrder> record) {
-        log.info("Received from partition {} with timestamp {}", record.partition(), record.timestamp());
-        ui.displayOrder(order);
-    }
-
-    @KafkaListener(topics = "tacocloud.orders.topic")
-    public void handle(TacoOrder order, Message<TacoOrder> message) {
-        MessageHeaders headers = message.getHeaders();
-        log.info("Received from partition {} with timestamp {}",
-                headers.get(KafkaHeaders.RECEIVED_PARTITION_ID),
-                headers.get(KafkaHeaders.RECEIVED_TIMESTAMP));
-        ui.displayOrder(order);
-    }
+//    @KafkaListener(topics = "tacocloud.orders.topic", groupId = "sia")
+//    public void handle(TacoOrder order) {
+//        ui.displayOrder(order);
+//    }
+//
+//    @KafkaListener(topics = "tacocloud.orders.topic", groupId = "sia")
+//    public void handle(TacoOrder order, ConsumerRecord<String, TacoOrder> record) {
+//        log.info("Received from partition {} with timestamp {}", record.partition(), record.timestamp());
+//        ui.displayOrder(order);
+//    }
+//
+//    @KafkaListener(topics = "tacocloud.orders.topic", groupId = "sia")
+//    public void handle(TacoOrder order, Message<TacoOrder> message) {
+//        MessageHeaders headers = message.getHeaders();
+//        log.info("Received from partition {} with timestamp {}",
+//                headers.get(KafkaHeaders.RECEIVED_PARTITION_ID),
+//                headers.get(KafkaHeaders.RECEIVED_TIMESTAMP));
+//        ui.displayOrder(order);
+//    }
 
 }
