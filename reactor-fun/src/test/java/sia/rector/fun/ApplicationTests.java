@@ -142,4 +142,104 @@ class ApplicationTests {
 					p.getT1().equals("Barbossa") && p.getT2().equals("Apples"))
 				.verifyComplete();
 	}
+
+	@Test
+	public void zipFluxesToObject() {
+		Flux<String> characterFlux = Flux.just("Garfield", "Kojak", "Barbossa");
+		Flux<String> foodFlux = Flux.just("Lasagna", "Lollipops", "Apples");
+
+		Flux<String> zippedFlux = Flux.zip(characterFlux, foodFlux, (c, f) -> {
+			return c + " eats " + f;
+		});
+
+		StepVerifier.create(zippedFlux)
+				.expectNext("Garfield eats Lasagna")
+				.expectNext("Kojak eats Lollipops")
+				.expectNext("Barbossa eats Apples")
+				.verifyComplete();
+	}
+
+	@Test
+	public void firstWithSignalFlux() {
+		Flux<String> slowFlux = Flux.just("tortoise", "snail", "sloth")
+				.delaySubscription(Duration.ofMillis(100));
+
+		Flux<String> fastFlux = Flux.just("hare", "cheetah", "squirrel");
+
+		Flux<String> firstFlux = Flux.firstWithSignal(slowFlux, fastFlux);
+
+		StepVerifier.create(firstFlux)
+				.expectNext("hare")
+				.expectNext("cheetah")
+				.expectNext("squirrel")
+				.verifyComplete();
+	}
+
+	@Test
+	public void skipAFew() {
+		Flux<String> countFlux = Flux.just(
+				"one", "two", "skip a few", "ninety nine", "one hundred")
+				.skip(3);
+
+		StepVerifier.create(countFlux)
+				.expectNext("ninety nine", "one hundred")
+				.verifyComplete();
+	}
+
+	@Test
+	public void skipAFewSeconds() {
+		Flux<String> countFlux = Flux.just(
+				"one", "two", "skip a few", "ninety nine", "one hundred")
+				.delayElements(Duration.ofSeconds(1))
+				.skip(Duration.ofSeconds(4));
+
+		StepVerifier.create(countFlux)
+				.expectNext("ninety nine", "one hundred")
+				.verifyComplete();
+	}
+
+	@Test
+	public void take() {
+		Flux<String> nationalParkFlux = Flux.just("Yellowstone", "Yosemite",
+				"Grand Canyon", "Zion", "Acadia")
+				.take(3);
+
+		StepVerifier.create(nationalParkFlux)
+				.expectNext("Yellowstone", "Yosemite", "Grand Canyon")
+				.verifyComplete();
+	}
+
+	@Test
+	public void takeForAWhile() {
+		Flux<String> nationalParkFlux = Flux.just("Yellowstone", "Yosemite",
+				"Grand Canyon", "Zion", "Grand Teton")
+				.delayElements(Duration.ofSeconds(1))
+				.take(Duration.ofMillis(3500));
+
+		StepVerifier.create(nationalParkFlux)
+				.expectNext("Yellowstone", "Yosemite", "Grand Canyon")
+				.verifyComplete();
+	}
+
+	@Test
+	public void filter() {
+		Flux<String> nationalParkFlux = Flux.just("Yellowstone", "Yosemite",
+				"Grand Canyon", "Zion", "Grand Teton")
+				.filter(np -> !np.contains(" "));
+
+		StepVerifier.create(nationalParkFlux)
+				.expectNext("Yellowstone", "Yosemite", "Zion")
+				.verifyComplete();
+	}
+
+	@Test
+	public void distinct() {
+		Flux<String> animalFlux = Flux.just("dog", "cat", "bird", "dog",
+				"bird", "anteater")
+				.distinct();
+
+		StepVerifier.create(animalFlux)
+				.expectNext("dog", "cat", "bird", "anteater")
+				.verifyComplete();
+	}
 }
