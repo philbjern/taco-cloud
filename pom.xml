@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>sia</groupId>
-    <artifactId>taco-cloud-parent</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <artifactId>taco-cloud-mongodb-parent</artifactId>
+    <version>0.0.12-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -23,23 +23,10 @@
 
     <modules>
         <module>tacocloud</module>
-        <module>tacocloud-admin</module>
+        <module>tacocloud-data-mongodb</module>
+        <module>tacocloud-domain-mongodb</module>
+        <module>tacocloud-api</module>
+        <module>tacocloud-security</module>
     </modules>
-
-    <repositories>
-        <repository>
-            <id>spring-milesones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

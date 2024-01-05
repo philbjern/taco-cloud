@@ -1,0 +1,51 @@
+security:
+  user:
+    name: buzz
+    password: infinity
+
+taco:
+  orders:
+    pageSize: 10
+
+
+  discount:
+    codes:
+      abcdef: 10
+
+#logging:
+#  level:
+#    org.springframework.data.rest: debug
+
+spring:
+  data:
+    rest:
+      base-path: /data-api
+    cassandra:
+      keyspace-name: tacocloud
+      schema-action: recreate
+
+  # The values given here are actually the default values. But they are explicitly
+  # set here as an example of setting the Kafka properties.
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    template:
+      default-topic: tacocloud.orders.topic
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1
+    username: tacouser
+    password: tacopassword
+
+logging:
+  level:
+    tacos: WARN

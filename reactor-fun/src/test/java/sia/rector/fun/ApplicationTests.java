@@ -1,4 +1,4 @@
-package sia.rector.fun;
+package tacos.rector.fun;
 
 import lombok.Data;
 import org.junit.jupiter.api.Test;
