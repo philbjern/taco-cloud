@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>sia</groupId>
-    <artifactId>taco-cloud-mongodb-parent</artifactId>
+    <artifactId>taco-cloud-parent</artifactId>
     <version>0.0.12-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -27,6 +27,7 @@
         <module>tacocloud-domain-mongodb</module>
         <module>tacocloud-api</module>
         <module>tacocloud-security</module>
+        <module>tacocloud-messaging-rabbitmq</module>
     </modules>
 
 </project>

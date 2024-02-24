@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>sia</groupId>
-        <artifactId>taco-cloud-mongodb-parent</artifactId>
+        <artifactId>taco-cloud-parent</artifactId>
         <version>0.0.12-SNAPSHOT</version>
     </parent>
 
